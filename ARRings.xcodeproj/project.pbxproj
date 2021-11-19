@@ -13,6 +13,10 @@
 		9B35BB1C2742B88800E7621B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B35BB1A2742B88800E7621B /* Main.storyboard */; };
 		9B35BB1E2742B88900E7621B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B35BB1D2742B88900E7621B /* Assets.xcassets */; };
 		9B35BB212742B88900E7621B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B35BB1F2742B88900E7621B /* LaunchScreen.storyboard */; };
+		9B427A682746E70C00ACC952 /* RingInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B427A672746E70C00ACC952 /* RingInit.swift */; };
+		9B427A6A2746E8F500ACC952 /* ScorePointInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B427A692746E8F500ACC952 /* ScorePointInit.swift */; };
+		9B427A6C2746EAF800ACC952 /* ScorePoint2Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B427A6B2746EAF800ACC952 /* ScorePoint2Init.swift */; };
+		9BF5F73F27458C3F00C2BCA2 /* CollisionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5F73E27458C3F00C2BCA2 /* CollisionCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		9B35BB1D2742B88900E7621B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B35BB202742B88900E7621B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B35BB222742B88900E7621B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B427A672746E70C00ACC952 /* RingInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingInit.swift; sourceTree = "<group>"; };
+		9B427A692746E8F500ACC952 /* ScorePointInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointInit.swift; sourceTree = "<group>"; };
+		9B427A6B2746EAF800ACC952 /* ScorePoint2Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePoint2Init.swift; sourceTree = "<group>"; };
+		9BF5F73E27458C3F00C2BCA2 /* CollisionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,43 @@
 		9B35BB132742B88800E7621B /* ARRings */ = {
 			isa = PBXGroup;
 			children = (
+				9B427A712746F41300ACC952 /* Controller */,
+				9B427A702746F39F00ACC952 /* View */,
 				9B35BB142742B88800E7621B /* AppDelegate.swift */,
 				9B35BB162742B88800E7621B /* art.scnassets */,
-				9B35BB182742B88800E7621B /* ViewController.swift */,
-				9B35BB1A2742B88800E7621B /* Main.storyboard */,
+				9B427A6F2746F36600ACC952 /* Models */,
 				9B35BB1D2742B88900E7621B /* Assets.xcassets */,
-				9B35BB1F2742B88900E7621B /* LaunchScreen.storyboard */,
 				9B35BB222742B88900E7621B /* Info.plist */,
 			);
 			path = ARRings;
+			sourceTree = "<group>";
+		};
+		9B427A6F2746F36600ACC952 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9BF5F73E27458C3F00C2BCA2 /* CollisionCategory.swift */,
+				9B427A672746E70C00ACC952 /* RingInit.swift */,
+				9B427A692746E8F500ACC952 /* ScorePointInit.swift */,
+				9B427A6B2746EAF800ACC952 /* ScorePoint2Init.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9B427A702746F39F00ACC952 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9B35BB1F2742B88900E7621B /* LaunchScreen.storyboard */,
+				9B35BB1A2742B88800E7621B /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9B427A712746F41300ACC952 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9B35BB182742B88800E7621B /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +175,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B35BB192742B88800E7621B /* ViewController.swift in Sources */,
+				9B427A6A2746E8F500ACC952 /* ScorePointInit.swift in Sources */,
+				9B427A682746E70C00ACC952 /* RingInit.swift in Sources */,
 				9B35BB152742B88800E7621B /* AppDelegate.swift in Sources */,
+				9B427A6C2746EAF800ACC952 /* ScorePoint2Init.swift in Sources */,
+				9BF5F73F27458C3F00C2BCA2 /* CollisionCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
