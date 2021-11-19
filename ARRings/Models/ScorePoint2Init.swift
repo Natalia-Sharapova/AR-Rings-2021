@@ -27,7 +27,7 @@ final class ScorePoint2Init: SCNNode {
         self.geometry = scorePoint2
         self.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: self))
         
-        //Add physicsBody to get contact with any balls
+        //Add physicsBody to get contact 
         self.physicsBody?.categoryBitMask = CollisionCategory.scorePoint2.rawValue
         self.physicsBody?.contactTestBitMask = CollisionCategory.scorePoint.rawValue
         

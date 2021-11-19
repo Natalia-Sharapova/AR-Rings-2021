@@ -10,7 +10,7 @@ import SceneKit
 import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
-
+    
     //MARK: - Outlets
     
     @IBOutlet var sceneView: ARSCNView!
@@ -31,13 +31,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         didSet {
             if allThrownRings.count > 10 {
                 DispatchQueue.main.async {
-                                    // Delete the ring from scene and it's Texture
-                                    let ring = self.allThrownRings.removeFirst()
-                                    ring.geometry?.firstMaterial?.diffuse.contents = nil
-                                    ring.removeFromParentNode()
+                    // Delete the ring from scene
+                    let ring = self.allThrownRings.removeFirst()
+                    ring.geometry?.firstMaterial?.diffuse.contents = nil
+                    ring.removeFromParentNode()
+                }
             }
         }
-    }
     }
     
     // Create a session configuration
@@ -52,11 +52,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
     private var powerOfThrow: Float = 0
     private var pinNodePosition = SCNVector3()
+    private var points = 0
     private var swipeLocation = CGPoint()
     private var swipeStart = CGPoint()
     private var swipeEnd = CGPoint()
-    private var points = 0
     
+    //Distance between camera and the pin
     var distance: Double = 0 {
         didSet {
             distanceLabel.text = "\(String(format: "%.1f", distance)) m"
@@ -68,8 +69,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         didSet {
             DispatchQueue.main.async {
                 self.scoreLabel.text = "\(self.score)"
+            }
         }
-    }
     }
     
     //MARK: - LifeCycle
@@ -84,8 +85,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-        // Show statistics such as fps and timing information
+        // Show statistics
         sceneView.showsStatistics = true
+        
+        //Properties of labels and buttons
         
         for label in arrayOfLabels {
             label.alpha = 1
@@ -116,20 +119,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         quitGameButton.frame = CGRect(x: view.bounds.midX - 150, y: 780, width: 300, height: 50)
         quitGameButton.titleLabel?.font = UIFont(name: "Gill Sans", size: 25)
         
-        congradLabel.alpha = 0.8
-        congradLabel.tintColor = .white
-        congradLabel.backgroundColor = .gray
         congradLabel.text = "Congratulations!"
         congradLabel.font = UIFont(name: "Gill Sans", size: 36)
         
-        resultLabel.alpha = 0.8
-        resultLabel.tintColor = .white
-        resultLabel.backgroundColor = .gray
         resultLabel.font = UIFont(name: "Gill Sans", size: 36)
         
-        restartButton.alpha = 0.8
-        restartButton.tintColor = .white
-        restartButton.backgroundColor = .gray
         restartButton.setTitle("Restart", for: .normal)
         restartButton.titleLabel?.font = UIFont(name: "Gill Sans", size: 35)
         
@@ -146,25 +140,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         //Detect horizontal planes
         configuration.planeDetection = .horizontal
-
-        // Run the view's session
+        
+        //Run the view's session
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
+        //Pause the view's session
         sceneView.session.pause()
     }
     
     //MARK: - Methods
     
+    //Calculating power of the throw
+    
     func calculatingOfPower() {
         
         let swipePower = Float(swipeStart.y - swipeEnd.y) / Float(sceneView.frame.height)
         powerOfThrow = 50 * (0.1 + swipePower)
-    
     }
     
     func getAreaNode() -> SCNNode {
@@ -193,6 +188,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         pinNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: pinNode))
         
+        //Get pin position for calculating of distance
         pinNodePosition = pinNode.position
         
         pinNode.physicsBody?.categoryBitMask = CollisionCategory.area.rawValue
@@ -207,10 +203,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         //Get extent
         let extent = anchor.extent
         
+        //Create geometry
         let plane = SCNPlane(width: CGFloat(extent.x), height: CGFloat(extent.z))
-        
         plane.firstMaterial?.diffuse.contents = UIColor.green
         
+        //Get node
         let planeNode = SCNNode(geometry: plane)
         planeNode.opacity = 0.5
         planeNode.eulerAngles.x -= .pi / 2
@@ -233,19 +230,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         let y = -matrixCameraTransform.m32 * powerOfThrow
         let z = -matrixCameraTransform.m33 * powerOfThrow
         
+        //Calculation the force direction
         let forceDirection = SCNVector3(x, y, z)
         
+        //Addition force to the ringNode
         ringNode.physicsBody?.applyForce(forceDirection, asImpulse: true)
         
         ringNode.simdTransform = cameratransform
         
+        //Calculating of distance
         distance = Double(sqrtf(pow(ringNode.position.x - pinNodePosition.x, 2) + pow(ringNode.position.z - pinNodePosition.z, 2)))
-    
+        
         return ringNode
     }
     
     func getScorePointNode() -> SCNNode {
-       
+        
         let scorePointNode = ScorePointInit()
         
         scorePointNode.position = SCNVector3(0, 0, 0)
@@ -257,9 +257,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     func getScorePointNode2() -> SCNNode {
         
         let scorePointNode2 = ScorePoint2Init()
-      
+        
         scorePointNode2.position = SCNVector3(-0.4, -3.3, -8)
-       
+        
         return scorePointNode2
     }
     
@@ -269,7 +269,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         else { return }
         
-        // When the Ball touch the Point, it disables contact for correct counting of these balls
+        // When the scorePoint touch the scorePoint2, it disables contact for correct counting
         if nodeAMask & nodeBMask == CollisionCategory.scorePoint.rawValue & CollisionCategory.scorePoint2.rawValue {
             
             contact.nodeA.physicsBody?.contactTestBitMask = 0
@@ -278,11 +278,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             score += points
         }
     }
-            
+    
     func updatePlaneNode(_ node: SCNNode, for anchor: ARPlaneAnchor) {
-        guard let planeNode = node.childNodes.first, let plane = planeNode.geometry as? SCNPlane else {
-            return
-        }
+        guard let planeNode = node.childNodes.first, let plane = planeNode.geometry as? SCNPlane else { return }
         //Change planeNode center
         planeNode.simdPosition = anchor.center
         
@@ -293,15 +291,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     }
     
     func updateUI() {
+        
+        //Remove all ringNodes
         allThrownRings.forEach{ ring in ring.removeFromParentNode() }
         allThrownRings.removeAll()
+        
         distanceLabel.text = ""
         scoreLabel.text = ""
     }
-
+    
     // MARK: - ARSCNViewDelegate
     
-     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor, planeAnchor.alignment == .horizontal else { return }
         
         //Add the areaNode to the center of detected horizontal plane
@@ -315,14 +316,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         //Update planeNode
         updatePlaneNode(node, for: planeAnchor)
     }
-        
+    
     
     //MARK: - Actions
     
     @IBAction func userTapped(_ sender: UITapGestureRecognizer) {
         
         if isAreaAdded {
-         return
+            return
             
         } else {
             
@@ -353,29 +354,34 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         if !isAreaAdded {
             return
         } else {
-        
-        //Calculating of power for throwing the ring
-        switch sender.state {
-        case .began:
-            swipeStart = sender.location(in: sceneView)
-        case .ended:
-            swipeEnd = sender.location(in: sceneView)
             
-            calculatingOfPower()
+            //Calculating of power for throwing the ring
             
-            //Add new ball
-            guard let ringNode = getRingNode() else { return }
-           ringNode.eulerAngles.x = .pi / 2
-           ringNode.eulerAngles.y = .pi / 2
-            
-            allThrownRings.append(ringNode)
-            
-            sceneView.scene.rootNode.addChildNode(ringNode)
-            ringNode.addChildNode(getScorePointNode())
-            
-        default:
-          break
-        }
+            switch sender.state {
+            case .began:
+                swipeStart = sender.location(in: sceneView)
+            case .ended:
+                swipeEnd = sender.location(in: sceneView)
+                
+                calculatingOfPower()
+                
+                //Add new ring
+                guard let ringNode = getRingNode() else { return }
+                
+                //Rotate node to make it horizontal
+                ringNode.eulerAngles.x = .pi / 2
+                ringNode.eulerAngles.y = .pi / 2
+                
+                //Add node to the array
+                allThrownRings.append(ringNode)
+                
+                //Add node to the scene
+                sceneView.scene.rootNode.addChildNode(ringNode)
+                ringNode.addChildNode(getScorePointNode())
+                
+            default:
+                break
+            }
         }
     }
     

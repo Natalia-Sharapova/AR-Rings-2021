@@ -21,7 +21,7 @@ final class ScorePointInit: SCNNode {
     }
     
     private func initialisation() {
-
+        
         let scorePoint = SCNPlane(width: 0.3, height: 0.3)
         self.geometry = scorePoint
         
@@ -29,7 +29,7 @@ final class ScorePointInit: SCNNode {
         
         self.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(node: self))
         
-        //Add physicsBody to get contact with any balls
+        //Add physicsBody to get contact 
         self.physicsBody?.categoryBitMask = CollisionCategory.scorePoint.rawValue
         self.physicsBody?.contactTestBitMask = CollisionCategory.scorePoint2.rawValue
     }

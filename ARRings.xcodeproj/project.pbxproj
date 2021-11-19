@@ -17,6 +17,10 @@
 		9B427A6A2746E8F500ACC952 /* ScorePointInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B427A692746E8F500ACC952 /* ScorePointInit.swift */; };
 		9B427A6C2746EAF800ACC952 /* ScorePoint2Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B427A6B2746EAF800ACC952 /* ScorePoint2Init.swift */; };
 		9BF5F73F27458C3F00C2BCA2 /* CollisionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5F73E27458C3F00C2BCA2 /* CollisionCategory.swift */; };
+		9BFD82F227481918003A1260 /* Screenshot04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD82EE27481918003A1260 /* Screenshot04.jpg */; };
+		9BFD82F327481918003A1260 /* Screenshot02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD82EF27481918003A1260 /* Screenshot02.jpg */; };
+		9BFD82F427481918003A1260 /* Screenshot03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD82F027481918003A1260 /* Screenshot03.jpg */; };
+		9BFD82F527481918003A1260 /* Screenshot01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD82F127481918003A1260 /* Screenshot01.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		9B427A692746E8F500ACC952 /* ScorePointInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointInit.swift; sourceTree = "<group>"; };
 		9B427A6B2746EAF800ACC952 /* ScorePoint2Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePoint2Init.swift; sourceTree = "<group>"; };
 		9BF5F73E27458C3F00C2BCA2 /* CollisionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCategory.swift; sourceTree = "<group>"; };
+		9BFD82EE27481918003A1260 /* Screenshot04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot04.jpg; sourceTree = "<group>"; };
+		9BFD82EF27481918003A1260 /* Screenshot02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot02.jpg; sourceTree = "<group>"; };
+		9BFD82F027481918003A1260 /* Screenshot03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot03.jpg; sourceTree = "<group>"; };
+		9BFD82F127481918003A1260 /* Screenshot01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screenshot01.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,13 +72,14 @@
 		9B35BB132742B88800E7621B /* ARRings */ = {
 			isa = PBXGroup;
 			children = (
-				9B427A712746F41300ACC952 /* Controller */,
-				9B427A702746F39F00ACC952 /* View */,
 				9B35BB142742B88800E7621B /* AppDelegate.swift */,
 				9B35BB162742B88800E7621B /* art.scnassets */,
-				9B427A6F2746F36600ACC952 /* Models */,
 				9B35BB1D2742B88900E7621B /* Assets.xcassets */,
+				9B427A712746F41300ACC952 /* Controller */,
 				9B35BB222742B88900E7621B /* Info.plist */,
+				9B427A6F2746F36600ACC952 /* Models */,
+				9BFD82ED27481918003A1260 /* Screenshots */,
+				9B427A702746F39F00ACC952 /* View */,
 			);
 			path = ARRings;
 			sourceTree = "<group>";
@@ -102,6 +111,17 @@
 			);
 			path = Controller;
 			sourceTree = "<group>";
+		};
+		9BFD82ED27481918003A1260 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				9BFD82EE27481918003A1260 /* Screenshot04.jpg */,
+				9BFD82EF27481918003A1260 /* Screenshot02.jpg */,
+				9BFD82F027481918003A1260 /* Screenshot03.jpg */,
+				9BFD82F127481918003A1260 /* Screenshot01.jpg */,
+			);
+			path = Screenshots;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -161,8 +181,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B35BB172742B88800E7621B /* art.scnassets in Resources */,
+				9BFD82F327481918003A1260 /* Screenshot02.jpg in Resources */,
 				9B35BB212742B88900E7621B /* LaunchScreen.storyboard in Resources */,
 				9B35BB1E2742B88900E7621B /* Assets.xcassets in Resources */,
+				9BFD82F227481918003A1260 /* Screenshot04.jpg in Resources */,
+				9BFD82F427481918003A1260 /* Screenshot03.jpg in Resources */,
+				9BFD82F527481918003A1260 /* Screenshot01.jpg in Resources */,
 				9B35BB1C2742B88800E7621B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

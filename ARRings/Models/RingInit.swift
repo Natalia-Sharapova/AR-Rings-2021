@@ -21,7 +21,7 @@ final class RingInit: SCNNode {
     }
     
     private func initialisation() {
-
+        
         //Ring geometry
         let ring = SCNTorus(ringRadius: 0.20, pipeRadius: 0.01)
         ring.firstMaterial?.diffuse.contents = UIImage(named: "gold")
@@ -31,13 +31,13 @@ final class RingInit: SCNNode {
         
         //Get physics body
         self.physicsBody = SCNPhysicsBody(type: .dynamic,
-                                              shape: SCNPhysicsShape(
-                                              node: self,
-                                              options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron]))
+                                          shape: SCNPhysicsShape(
+                                            node: self,
+                                            options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron]))
         
-        //Add BitMasks to the Ball
+        //Add BitMasks to the ring
         self.physicsBody?.categoryBitMask = CollisionCategory.ring.rawValue
         self.physicsBody?.collisionBitMask = CollisionCategory.area.rawValue | CollisionCategory.pin.rawValue
     }
-
+    
 }
